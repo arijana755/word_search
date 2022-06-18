@@ -242,12 +242,12 @@
    */
   WordSeach.prototype.initmatrix = function(size) {
    var rsize = size;
-   var csize = size
-   if (this.settings.condition == 0) {
+   var csize = size;
+   if (this.settings.condition == 0 && !this.settings.test) {
 	csize = 18;
 	rsize = 12;
    }
-   if (this.settings.condition == 1) {
+   if (this.settings.condition == 1 && !this.settings.test) {
 	csize = 18;
 	rsize = 12;
    }
@@ -421,10 +421,6 @@
   WordSeach.prototype.drawmatrix = function() {
     var rowcount = this.settings.gridSize;
 	var columncount = this.settings.gridSize;
-	if (this.settings.test) { 
-		rowcount = 3; 
-		columncount = 9;
-	}
 	if (this.settings.condition == 0) {
 		rowcount = 12;
 		columncount = 18;
@@ -436,6 +432,10 @@
 	if (this.settings.condition > 2) {
 		rowcount = 14;
 		columncount = 11;
+	}
+	if (this.settings.test) { 
+		rowcount = 3; 
+		columncount = 9;
 	}
 	
 	
