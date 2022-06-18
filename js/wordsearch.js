@@ -67,7 +67,6 @@
 		} else {
 		    isWorked = this.addWords();
 		}
-		}
       }
 
       // Fill up the remaining blank items
