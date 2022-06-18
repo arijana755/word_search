@@ -245,11 +245,11 @@
    var csize = size
    if (this.settings.condition == 0) {
 	csize = 18;
-	rsize = 13;
+	rsize = 12;
    }
    if (this.settings.condition == 1) {
 	csize = 18;
-	rsize = 13;
+	rsize = 12;
    }
    if (this.settings.condition > 2) {
       rsize = 14;
@@ -424,6 +424,14 @@
 	if (this.settings.test) { 
 		rowcount = 3; 
 		columncount = 9;
+	}
+	if (this.settings.condition == 0) {
+		rowcount = 12;
+		columncount = 18;
+	}
+	if (this.settings.condition == 1) {
+		rowcount = 12;
+		columncount = 18;
 	}
 	if (this.settings.condition > 2) {
 		rowcount = 14;
