@@ -65,7 +65,7 @@
 		if (this.settings.test) {
 			isWorked = this.testmatrix(this.settings.gridSize);
 		} else {
-		    isWorked = this.bobmatrix(this.settings.gridSize);
+		    isWorked = this.addWords();
 		}
 		}
       }
