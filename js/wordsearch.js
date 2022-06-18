@@ -245,11 +245,11 @@
    var csize = size
    if (this.settings.condition == 0) {
 	csize = 18;
-	rsize = 12;
+	rsize = 13;
    }
    if (this.settings.condition == 1) {
 	csize = 18;
-	rsize = 12;
+	rsize = 13;
    }
    if (this.settings.condition > 2) {
       rsize = 14;
