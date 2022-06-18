@@ -54,27 +54,17 @@
     if (this.parseWords(this.settings.gridSize)) {
       // Add words into the matrix data
       var isWorked = false;
-	  
 	  if (this.settings.test) {
-			this.words = ['browser'];
+		this.words = ['browser'];
 	  }
-	
       while (isWorked == false) {
         // initialize the application
         this.initialize();
 		if (this.settings.test) {
 			isWorked = this.testmatrix(this.settings.gridSize);
 		} else {
-		    isWorked = this.addWords();
+		    isWorked = this.bobmatrix(this.settings.gridSize)   
 		}
-      }
-
-      // Fill up the remaining blank items
-      if (!this.settings.debug) {
-	     if (!this.settings.test) {
-			this.fillUpFools();
-		 }
-		//disable this to check earlystop
       }
 
       // Draw the matrix into wrap element
@@ -302,47 +292,31 @@
     //    }
 	//}
 	 	//puzzle 85 from jumbo word puzzle book volume 46, landolls, 1995, ashland, oh
-	var control_matrix = [
-[	'V', 	'H', 	'W', 	'X', 	'S', 	'C', 	'E', 	'P', 	'T', 	'E', 	'R', 	'C', 	'R', 	'S', 	'P', 	'S', 	'J', 	'T'	],
-[	'S', 	'T', 	'T', 	'T', 	'N', 	'X', 	'D', 	'Y', 	'D', 	'X', 	'L', 	'M', 	'W', 	'K', 	'A', 	'O', 	'B', 	'C'	],
-[	'G', 	'N', 	'A', 	'R', 	'C', 	'W', 	'O', 	'E', 	'A', 	'Y', 	'T', 	'R', 	'S', 	'V', 	'L', 	'V', 	'G', 	'J'	],
-[	'C', 	'T', 	'O', 	'D', 	'O', 	'P', 	'O', 	'F', 	'S', 	'N', 	'N', 	'R', 	'A', 	'H', 	'A', 	'E', 	'G', 	'P'	],
-[	'E', 	'O', 	'B', 	'M', 	'R', 	'S', 	'D', 	'R', 	'E', 	'C', 	'O', 	'A', 	'O', 	'E', 	'C', 	'R', 	'I', 	'A'	],
-[	'R', 	'I', 	'L', 	'I', 	'M', 	'F', 	'N', 	'M', 	'C', 	'N', 	'E', 	'U', 	'S', 	'K', 	'E', 	'E', 	'P', 	'A'	],
-[	'J', 	'E', 	'N', 	'O', 	'A', 	'O', 	'N', 	'O', 	'O', 	'M', 	'S', 	'N', 	'I', 	'T', 	'K', 	'I', 	'U', 	'H'	],
-[	'H', 	'C', 	'T', 	'M', 	'N', 	'R', 	'C', 	'H', 	'C', 	'E', 	'O', 	'N', 	'T', 	'N', 	'Y', 	'G', 	'W', 	'L'	],
-[	'E', 	'T', 	'I', 	'R', 	'E', 	'Y', 	'H', 	'O', 	'H', 	'M', 	'G', 	'T', 	'I', 	'D', 	'H', 	'N', 	'L', 	'N'	],
-[	'H', 	'L', 	'R', 	'V', 	'A', 	'E', 	'T', 	'O', 	'L', 	'D', 	'L', 	'G', 	'S', 	'L', 	'U', 	'I', 	'K', 	'J'	],
-[	'Y', 	'T', 	'O', 	'I', 	'A', 	'H', 	'L', 	'I', 	'O', 	'O', 	'H', 	'A', 	'A', 	'U', 	'N', 	'K', 	'V', 	'F'	],
-[	'W', 	'G', 	'L', 	'D', 	'B', 	'D', 	'C', 	'M', 	'I', 	'T', 	'R', 	'W', 	'E', 	'E', 	'C', 	'X', 	'E', 	'W'	],
-[	'L', 	'A', 	'Y', 	'O', 	'R', 	'B', 	'T', 	'U', 	'K', 	'D', 	'J', 	'D', 	'B', 	'R', 	'T', 	'K', 	'R', 	'A'	],
-[	'S', 	'E', 	'A', 	'L', 	'M', 	'U', 	'C', 	'T', 	'W', 	'I', 	'N', 	'D', 	'S', 	'O', 	'R', 	'C', 	'U', 	'C'	],
-[	'Z', 	'N', 	'E', 	'T', 	'N', 	'E', 	'M', 	'A', 	'I', 	'L', 	'R', 	'A', 	'P', 	'Z', 	'M', 	'I', 	'L', 	'B'	],
-[	'Z', 	'T', 	'H', 	'R', 	'O', 	'N', 	'E', 	'B', 	'P', 	'A', 	'T', 	'R', 	'O', 	'N', 	'A', 	'G', 	'E', 	'W'	],
-[	'V', 	'P', 	'K', 	'M', 	'V', 	'G', 	'F', 	'T', 	'R', 	'A', 	'D', 	'I', 	'T', 	'I', 	'O', 	'N', 	'R', 	'Q'	],
-[	'O', 	'Z', 	'A', 	'C', 	'G', 	'R', 	'N', 	'T', 	'A', 	'O', 	'Y', 	'D', 	'L', 	'G', 	'X', 	'C', 	'M', 	'C'	]
-];
+	var control_matrix = [['K', 'C', 'R', 'A', 'S', 'M', 'C', 'M', 'S', 'C', 'Z', 'E', 'Z', 'Z', 'G', 'N', 'X', 'C'],
+['P', 'A', 'D', 'T', 'O', 'L', 'O', 'M', 'P', 'A', 'Q', 'U', 'C', 'R', 'T', 'U', 'Y', 'H'],
+['R', 'R', 'M', 'O', 'U', 'T', 'V', 'U', 'L', 'R', 'L', 'G', 'R', 'O', 'G', 'T', 'X', 'O'],
+['O', 'E', 'H', 'U', 'Q', 'V', 'H', 'S', 'C', 'B', 'Y', 'B', 'V', 'F', 'V', 'R', 'Z', 'C'],
+['T', 'E', 'A', 'R', 'X', 'K', 'O', 'C', 'V', 'O', 'W', 'Y', 'A', 'A', 'C', 'I', 'S', 'O'],
+['E', 'R', 'B', 'N', 'M', 'Z', 'Y', 'L', 'W', 'H', 'A', 'K', 'P', 'N', 'C', 'T', 'O', 'L'],
+['I', 'J', 'V', 'A', 'A', 'H', 'C', 'E', 'P', 'Y', 'J', 'Q', 'K', 'A', 'O', 'I', 'U', 'A'],
+['N', 'U', 'H', 'M', 'V', 'D', 'K', 'S', 'S', 'D', 'E', 'K', 'O', 'T', 'F', 'O', 'F', 'T'],
+['U', 'P', 'P', 'E', 'B', 'Z', 'Y', 'V', 'Y', 'R', 'Q', 'H', 'F', 'O', 'F', 'N', 'H', 'E'],
+['U', 'S', 'C', 'N', 'J', 'D', 'R', 'N', 'U', 'A', 'X', 'B', 'A', 'M', 'E', 'H', 'A', 'I'],
+['T', 'E', 'D', 'T', 'M', 'M', 'Q', 'B', 'D', 'T', 'L', 'A', 'D', 'Y', 'E', 'G', 'P', 'B'],
+['N', 'H', 'H', 'E', 'H', 'O', 'N', 'E', 'Y', 'E', 'R', 'J', 'B', 'Z', 'C', 'T', 'P', 'W']];
 
-	var impossible_matrix = [
-[	'V', 	'H', 	'W', 	'X', 	'S', 	'C', 	'E', 	'P', 	'T', 	'E', 	'R', 	'C', 	'R', 	'S', 	'P', 	'S', 	'J', 	'T'	],
-[	'S', 	'T', 	'T', 	'T', 	'N', 	'X', 	'B', 	'Y', 	'D', 	'X', 	'L', 	'M', 	'W', 	'K', 	'A', 	'F', 	'B', 	'C'	],
-[	'G', 	'O', 	'A', 	'R', 	'C', 	'W', 	'O', 	'T', 	'A', 	'Y', 	'T', 	'E', 	'S', 	'V', 	'L', 	'O', 	'G', 	'J'	],
-[	'C', 	'T', 	'N', 	'D', 	'O', 	'W', 	'O', 	'F', 	'V', 	'N', 	'N', 	'R', 	'G', 	'H', 	'A', 	'D', 	'G', 	'P'	],
-[	'E', 	'O', 	'B', 	'F', 	'B', 	'S', 	'D', 	'R', 	'E', 	'C', 	'O', 	'A', 	'O', 	'V', 	'C', 	'T', 	'I', 	'A'	],
-[	'R', 	'I', 	'L', 	'J', 	'J', 	'A', 	'N', 	'M', 	'C', 	'N', 	'E', 	'U', 	'S', 	'H', 	'E', 	'E', 	'P', 	'A'	],
-[	'J', 	'E', 	'N', 	'O', 	'P', 	'B', 	'U', 	'O', 	'O', 	'M', 	'S', 	'N', 	'N', 	'T', 	'K', 	'I', 	'U', 	'H'	],
-[	'H', 	'C', 	'T', 	'S', 	'N', 	'F', 	'W', 	'H', 	'C', 	'E', 	'O', 	'P', 	'T', 	'N', 	'Y', 	'G', 	'W', 	'L'	],
-[	'E', 	'T', 	'Y', 	'R', 	'E', 	'Y', 	'H', 	'O', 	'H', 	'M', 	'R', 	'T', 	'I', 	'D', 	'H', 	'N', 	'L', 	'N'	],
-[	'H', 	'L', 	'R', 	'P', 	'N', 	'E', 	'T', 	'O', 	'L', 	'X', 	'L', 	'G', 	'S', 	'S', 	'U', 	'I', 	'K', 	'J'	],
-[	'Y', 	'T', 	'C', 	'I', 	'A', 	'H', 	'L', 	'I', 	'I', 	'O', 	'H', 	'A', 	'M', 	'U', 	'N', 	'K', 	'V', 	'F'	],
-[	'W', 	'S', 	'L', 	'D', 	'B', 	'D', 	'H', 	'M', 	'I', 	'T', 	'R', 	'U', 	'E', 	'E', 	'C', 	'X', 	'E', 	'W'	],
-[	'O', 	'T', 	'O', 	'K', 	'I', 	'B', 	'T', 	'U', 	'K', 	'D', 	'J', 	'D', 	'B', 	'R', 	'T', 	'K', 	'R', 	'A'	],
-[	'S', 	'E', 	'A', 	'L', 	'M', 	'U', 	'C', 	'T', 	'W', 	'I', 	'N', 	'D', 	'S', 	'O', 	'R', 	'C', 	'U', 	'C'	],
-[	'Z', 	'N', 	'E', 	'T', 	'N', 	'E', 	'M', 	'A', 	'I', 	'L', 	'R', 	'A', 	'P', 	'Z', 	'M', 	'I', 	'L', 	'B'	],
-[	'Z', 	'T', 	'H', 	'R', 	'O', 	'N', 	'E', 	'B', 	'P', 	'A', 	'T', 	'R', 	'O', 	'N', 	'A', 	'G', 	'E', 	'W'	],
-[	'V', 	'P', 	'K', 	'M', 	'V', 	'G', 	'F', 	'T', 	'R', 	'A', 	'D', 	'I', 	'T', 	'I', 	'O', 	'N', 	'R', 	'Q'	],
-[	'O', 	'Z', 	'A', 	'C', 	'G', 	'R', 	'N', 	'T', 	'A', 	'O', 	'Y', 	'D', 	'L', 	'G', 	'X', 	'C', 	'M', 	'C'	]
-];
+	var impossible_matrix = [['S', 'F', 'P', 'H', 'O', 'R', 'O', 'L', 'L', 'I', 'N', 'G', 'P', 'I', 'N', 'B', 'E', 'H'],
+['B', 'R', 'S', 'I', 'R', 'L', 'W', 'M', 'V', 'S', 'W', 'N', 'W', 'N', 'T', 'W', 'X', 'T'],
+['Y', 'X', 'T', 'I', 'D', 'Z', 'L', 'A', 'C', 'A', 'O', 'M', 'H', 'W', 'I', 'E', 'O', 'A'],
+['Q', 'S', 'R', 'Z', 'K', 'L', 'O', 'E', 'F', 'K', 'I', 'M', 'I', 'J', 'N', 'T', 'O', 'O'],
+['W', 'P', 'A', 'V', 'J', 'E', 'A', 'N', 'Z', 'F', 'M', 'J', 'S', 'O', 'F', 'S', 'A', 'P'],
+['H', 'A', 'I', 'G', 'U', 'Z', 'T', 'L', 'X', 'S', 'L', 'R', 'K', 'Z', 'O', 'C', 'M', 'E'],
+['R', 'T', 'N', 'D', 'I', 'O', 'A', 'T', 'X', 'B', 'V', 'E', 'Z', 'I', 'I', 'A', 'V', 'E'],
+['Y', 'U', 'E', 'X', 'C', 'K', 'E', 'P', 'L', 'G', 'X', 'R', 'I', 'V', 'L', 'L', 'N', 'L'],
+['G', 'L', 'R', 'R', 'E', 'O', 'N', 'A', 'T', 'E', 'B', 'A', 'I', 'R', 'F', 'E', 'K', 'E'],
+['N', 'A', 'K', 'W', 'R', 'Q', 'D', 'G', 'M', 'I', 'K', 'R', 'K', 'S', 'O', 'S', 'O', 'R'],
+['S', 'T', 'L', 'P', 'H', 'Y', 'V', 'B', 'R', 'S', 'P', 'W', 'A', 'L', 'N', 'N', 'A', 'T'],
+['P', 'O', 'B', 'P', 'O', 'N', 'J', 'W', 'S', 'D', 'R', 'C', 'S', 'I', 'O', 'J', 'F', 'I']];
 
 	var power_matrix = [
 [	'K',	'X',	'N',	'A',	'V',	'K',	'W',	'U',	'D',	'K',	'B'	],
@@ -380,6 +354,14 @@
 
 	var csize = size;
 	var rsize = size;
+	if (this.settings.condition == 0) {
+		csize = 18;
+		rsize = 12;
+	}
+	if (this.settings.condition == 1) {
+		csize = 18;
+		rsize = 12;
+	}
 	if (this.settings.condition > 2) { 
 		csize = 11; 
 		rsize = 14;
