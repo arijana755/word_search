@@ -333,7 +333,7 @@
 		rsize = 14;
 	}
 	
-	for (var row = startrow; row < rsize; row++) {
+	for (var row = startrow; row < rsize+startrow; row++) {
       for (var col = 0; col < csize; col++) {
 	    if(this.settings.condition == 0) {
 			var item = {
