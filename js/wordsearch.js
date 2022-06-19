@@ -378,6 +378,7 @@
    * Draw the matrix
    */
   WordSeach.prototype.drawmatrix = function() {
+    alert('Got here');
     var rowcount = this.settings.gridSize;
 	var columncount = this.settings.gridSize;
 	if (this.settings.condition == 0 || this.settings.condition == 1) {
