@@ -61,9 +61,10 @@
 		    isWorked = this.bobmatrix(this.settings.gridSize)   
 		}
       }
+
       // Draw the matrix into wrap element
       this.drawmatrix();
-	  
+  
 	  //added by bob to show score - require score function in the bob script
 	  var currentscore = score();
 	  document.getElementById("score").innerHTML = "Found " + currentscore + " out of " + this.settings.words.length + " words so far.";
@@ -267,6 +268,7 @@
 ['U', 'S', 'C', 'N', 'J', 'D', 'R', 'N', 'U', 'A', 'X', 'B', 'A', 'M', 'E', 'H', 'A', 'I'],
 ['T', 'E', 'D', 'T', 'M', 'M', 'Q', 'B', 'D', 'T', 'L', 'A', 'D', 'Y', 'E', 'G', 'P', 'B'],
 ['N', 'H', 'H', 'E', 'H', 'O', 'N', 'E', 'Y', 'E', 'R', 'J', 'B', 'Z', 'C', 'T', 'P', 'W']];
+
 	var impossible_matrix = [['S', 'F', 'P', 'H', 'O', 'R', 'O', 'L', 'L', 'I', 'N', 'G', 'P', 'I', 'N', 'B', 'E', 'H'],
 ['B', 'R', 'S', 'I', 'R', 'L', 'W', 'M', 'V', 'S', 'W', 'N', 'W', 'N', 'T', 'W', 'X', 'T'],
 ['Y', 'X', 'T', 'I', 'D', 'Z', 'L', 'A', 'C', 'A', 'O', 'M', 'H', 'W', 'I', 'E', 'O', 'A'],
@@ -279,6 +281,7 @@
 ['N', 'A', 'K', 'W', 'R', 'Q', 'D', 'G', 'M', 'I', 'K', 'R', 'K', 'S', 'O', 'S', 'O', 'R'],
 ['S', 'T', 'L', 'P', 'H', 'Y', 'V', 'B', 'R', 'S', 'P', 'W', 'A', 'L', 'N', 'N', 'A', 'T'],
 ['P', 'O', 'B', 'P', 'O', 'N', 'J', 'W', 'S', 'D', 'R', 'C', 'S', 'I', 'O', 'J', 'F', 'I']];
+
 	var power_matrix = [
 [	'K',	'X',	'N',	'A',	'V',	'K',	'W',	'U',	'D',	'K',	'B'	],
 [	'C',	'O',	'F',	'F',	'E',	'E',	'N',	'O',	'E',	'T',	'S'	],
@@ -311,6 +314,7 @@
 [	'C',	'G',	'M',	'R',	'T',	'M',	'A',	'F',	'S',	'N',	'H'	],
 [	'U',	'F',	'P',	'G',	'B',	'C',	'X',	'T',	'K',	'J',	'J'	]
 ];
+
 	var csize = size;
 	var rsize = size;
 	var startrow = 0;
@@ -510,7 +514,7 @@
     }
   }
   /**
-   * Mouse event - Mouse down
+   * Mouse event - Mouse down
    * @param {Object} item
    */
   WordSeach.prototype.onMousedown = function(item) {
