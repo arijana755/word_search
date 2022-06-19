@@ -337,14 +337,14 @@
       for (var col = 0; col < csize; col++) {
 	    if(this.settings.condition == 0) {
 			var item = {
-			letter: control_matrix [row][col], // Default value
+			letter: control_matrix [row-startrow][col], // Default value
 			row: row,
 			col: col
 			}
 		} 
 	     if(this.settings.condition == 1) {
 			var item = {
-			letter: impossible_matrix [row][col], // Default value
+			letter: impossible_matrix [row-startrow][col], // Default value
 			row: row,
 			col: col
 			}
