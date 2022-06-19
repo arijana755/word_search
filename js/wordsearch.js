@@ -1,11 +1,9 @@
 (function(){
   'use strict';
-
   // Extend the element method
   Element.prototype.wordSeach = function(settings) {
     return new WordSeach(this, settings);
   }
-
   /**
    * Word search
    *
@@ -16,10 +14,8 @@
   function WordSeach(wrapEl, settings) {
     
     this.wrapEl = wrapEl;
-
     // Add `.ws-area` to wrap element
     this.wrapEl.classList.add('ws-area');
-
 	
 	var mid = gup('mid');
 	
@@ -45,7 +41,6 @@
 	  'same' : true,
 	  'test' : false
     }
-
     this.settings = Object.merge(settings, default_settings);
     //this.settings.condition = 5;   //need to remove this
    
@@ -66,7 +61,6 @@
 		    isWorked = this.bobmatrix(this.settings.gridSize)   
 		}
       }
-
       // Draw the matrix into wrap element
       this.drawmatrix();
 	  
@@ -75,7 +69,6 @@
 	  document.getElementById("score").innerHTML = "Found " + currentscore + " out of " + this.settings.words.length + " words so far.";
     }
   }
-
   
   /**
    * Parse words
@@ -84,11 +77,9 @@
    */
   WordSeach.prototype.parseWords = function(maxSize) {
     var itWorked = true;
-
     for (var i = 0; i < this.settings.words.length; i++) {
       // Convert all the letters to upper case
       this.settings.words[i] = this.settings.words[i].toUpperCase();
-
       var word = this.settings.words[i];
       if (word.length > maxSize) {
         alert('The length of word `' + word + '` is overflow the gridSize.');
@@ -96,18 +87,13 @@
         itWorked = false;
       }
     }
-
     return itWorked;
   }
-
   /**
    * Put the words into the matrix
    */
   WordSeach.prototype.addWords = function() {
 	  //modified this function to make impossible puzzles when condition = 1
-
-
-
       
 	  var condition = this.settings.condition;
 	  var endoflist = this.settings.words.length;	//default to add all words
@@ -122,18 +108,15 @@
       var keepGoing = true,
         counter = 0,
         isWorked = true;
-
       while (keepGoing) {
         // Getting random direction
         var dir = this.settings.directions[Math.rangeInt(this.settings.directions.length - 1)],
           result = this.addWord(this.settings.words[counter], dir),
           isWorked = true;
-
         if (result == false) {
           keepGoing = false;
           isWorked = false;
         }
-
         counter++;
 //        if (counter >= this.settings.words.length) {
 // 			modified this line from original to creat earlystop when condition = 1
@@ -141,12 +124,9 @@
           keepGoing = false;
         }
 		
-
       }
-
       return isWorked;
   }
-
   
   
   /**
@@ -164,53 +144,43 @@
         'EN': [1, -1] // From top right to bottom left
       },
       row, col; // y, x
-
     switch (direction) {
       case 'W': // Horizontal (From left to right)
         var row = Math.rangeInt(this.settings.gridSize  - 1),
           col = Math.rangeInt(this.settings.gridSize - word.length);
         break;
-
       case 'N': // Vertical (From top to bottom)
         var row = Math.rangeInt(this.settings.gridSize - word.length),
           col = Math.rangeInt(this.settings.gridSize  - 1);
         break;
-
       case 'WN': // From top left to bottom right
         var row = Math.rangeInt(this.settings.gridSize - word.length),
           col = Math.rangeInt(this.settings.gridSize - word.length);
         break;
-
       case 'EN': // From top right to bottom left
         var row = Math.rangeInt(this.settings.gridSize - word.length),
           col = Math.rangeInt(word.length - 1, this.settings.gridSize - 1);
         break;
-
       default:
         var error = 'UNKNOWN DIRECTION ' + direction + '!';
         alert(error);
         console.log(error);
         break;
     }
-
     // Add words to the matrix
     for (var i = 0; i < word.length; i++) {
       var newRow = row + i * directions[direction][0],
         newCol = col + i * directions[direction][1];
-
       // The letter on the board
       var origin = this.matrix[newRow][newCol].letter;
-
       if (origin == '.' || origin == word[i]) {
         this.matrix[newRow][newCol].letter = word[i];
       } else {
         itWorked = false;
       }
     }
-
     return itWorked;
   }
-
   /**
    * Initialize the application
    */
@@ -221,33 +191,29 @@
      * param {Array}
      */
     this.matrix = [];
-
     /**
      * Selection from
      * @Param {Object}
      */
     this.selectFrom = null;
-
     /**
      * Selected items
      */
     this.selected = [];
 	this.initmatrix(this.settings.gridSize);
-
   }
-
   /**
    * Fill default items into the matrix
    * @param {Number} size Grid size
    */
   WordSeach.prototype.initmatrix = function(size) {
    var rsize = size;
-   var csize = size;
-   if (this.settings.condition == 0 && !this.settings.test) {
+   var csize = size
+   if (this.settings.condition == 0) {
 	csize = 18;
 	rsize = 12;
    }
-   if (this.settings.condition == 1 && !this.settings.test) {
+   if (this.settings.condition == 1) {
 	csize = 18;
 	rsize = 12;
    }
@@ -262,16 +228,13 @@
           row: row,
           col: col
         }
-
         if (!this.matrix[row]) {
           this.matrix[row] = [];
         }
-
         this.matrix[row][col] = item;
       }
     }
   }
-
   WordSeach.prototype.testmatrix = function(size) {
     var test_matrix = [
 	['.','.','.','.','.','.','.','.','.'],
@@ -312,7 +275,6 @@
 ['U', 'S', 'C', 'N', 'J', 'D', 'R', 'N', 'U', 'A', 'X', 'B', 'A', 'M', 'E', 'H', 'A', 'I'],
 ['T', 'E', 'D', 'T', 'M', 'M', 'Q', 'B', 'D', 'T', 'L', 'A', 'D', 'Y', 'E', 'G', 'P', 'B'],
 ['N', 'H', 'H', 'E', 'H', 'O', 'N', 'E', 'Y', 'E', 'R', 'J', 'B', 'Z', 'C', 'T', 'P', 'W']];
-
 	var impossible_matrix = [['S', 'F', 'P', 'H', 'O', 'R', 'O', 'L', 'L', 'I', 'N', 'G', 'P', 'I', 'N', 'B', 'E', 'H'],
 ['B', 'R', 'S', 'I', 'R', 'L', 'W', 'M', 'V', 'S', 'W', 'N', 'W', 'N', 'T', 'W', 'X', 'T'],
 ['Y', 'X', 'T', 'I', 'D', 'Z', 'L', 'A', 'C', 'A', 'O', 'M', 'H', 'W', 'I', 'E', 'O', 'A'],
@@ -325,7 +287,6 @@
 ['N', 'A', 'K', 'W', 'R', 'Q', 'D', 'G', 'M', 'I', 'K', 'R', 'K', 'S', 'O', 'S', 'O', 'R'],
 ['S', 'T', 'L', 'P', 'H', 'Y', 'V', 'B', 'R', 'S', 'P', 'W', 'A', 'L', 'N', 'N', 'A', 'T'],
 ['P', 'O', 'B', 'P', 'O', 'N', 'J', 'W', 'S', 'D', 'R', 'C', 'S', 'I', 'O', 'J', 'F', 'I']];
-
 	var power_matrix = [
 [	'K',	'X',	'N',	'A',	'V',	'K',	'W',	'U',	'D',	'K',	'B'	],
 [	'C',	'O',	'F',	'F',	'E',	'E',	'N',	'O',	'E',	'T',	'S'	],
@@ -342,7 +303,6 @@
 [	'M',	'U',	'H',	'E',	'C',	'Y',	'O',	'T',	'S',	'W',	'O'	],
 [	'X',	'K',	'J',	'K',	'S',	'X',	'Z',	'O',	'Y',	'S',	'Z'	]
 ];
-
 	var neutral_matrix = [
 [	'J',	'O',	'Q',	'L',	'X',	'J',	'V',	'D',	'F',	'Y',	'D'	],
 [	'O',	'S',	'N',	'B',	'C',	'G',	'Z',	'R',	'R',	'R',	'R'	],
@@ -359,7 +319,6 @@
 [	'C',	'G',	'M',	'R',	'T',	'M',	'A',	'F',	'S',	'N',	'H'	],
 [	'U',	'F',	'P',	'G',	'B',	'C',	'X',	'T',	'K',	'J',	'J'	]
 ];
-
 	var csize = size;
 	var rsize = size;
 	if (this.settings.condition == 0) {
@@ -421,21 +380,17 @@
   WordSeach.prototype.drawmatrix = function() {
     var rowcount = this.settings.gridSize;
 	var columncount = this.settings.gridSize;
-	if (this.settings.condition == 0) {
+	if (this.settings.condition == 0 || this.settings.condition == 1) {
 		rowcount = 12;
 		columncount = 18;
-	}
-	if (this.settings.condition == 1) {
-		rowcount = 12;
-		columncount = 18;
-	}
-	if (this.settings.condition > 2) {
-		rowcount = 14;
-		columncount = 11;
 	}
 	if (this.settings.test) { 
 		rowcount = 3; 
 		columncount = 9;
+	}
+	if (this.settings.condition > 2) {
+		rowcount = 14;
+		columncount = 11;
 	}
 	
 	
@@ -444,34 +399,28 @@
       var divEl = document.createElement('div');
       divEl.setAttribute('class', 'ws-row');
       this.wrapEl.appendChild(divEl);
-
       for (var col = 0; col < columncount; col++) {
         var cvEl = document.createElement('canvas');
         cvEl.setAttribute('class', 'ws-col');
         cvEl.setAttribute('width', 25);
         cvEl.setAttribute('height', 25);
-
         // Fill text in middle center
         var x = cvEl.width / 2,
           y = cvEl.height / 2;
-
         var ctx = cvEl.getContext('2d');
         ctx.font = '400 18px Calibri';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#333'; // Text color
         ctx.fillText(this.matrix[row][col].letter, x, y);
-
         // Add event listeners
         cvEl.addEventListener('mousedown', this.onMousedown(this.matrix[row][col]));
         cvEl.addEventListener('mouseover', this.onMouseover(this.matrix[row][col]));
         cvEl.addEventListener('mouseup', this.onMouseup());
-
         divEl.appendChild(cvEl);
       }
     }
   }
-
   /**
    * Fill up the remaining items
    */
@@ -491,7 +440,6 @@
       }
     }
   }
-
   /**
    * Returns matrix items
    * @param rowFrom
@@ -502,13 +450,11 @@
    */
   WordSeach.prototype.getItems = function(rowFrom, colFrom, rowTo, colTo) {
     var items = [];
-
     if ( rowFrom === rowTo || colFrom === colTo || Math.abs(rowTo - rowFrom) == Math.abs(colTo - colFrom) ) {
       var shiftY = (rowFrom === rowTo) ? 0 : (rowTo > rowFrom) ? 1 : -1,
         shiftX = (colFrom === colTo) ? 0 : (colTo > colFrom) ? 1 : -1,
         row = rowFrom,
         col = colFrom;
-
       items.push(this.getItem(row, col));
       do {
         row += shiftY;
@@ -516,10 +462,8 @@
         items.push(this.getItem(row, col));
       } while( row !== rowTo || col !== colTo );
     }
-
     return items;
   }
-
   /**
    * Returns matrix item
    * @param {Number} row
@@ -529,7 +473,6 @@
   WordSeach.prototype.getItem = function(row, col) {
     return (this.matrix[row] ? this.matrix[row][col] : undefined);
   }
-
   /**
    * Clear the exist highlights
    */
@@ -539,7 +482,6 @@
       selectedEls[i].classList.remove('ws-selected');
     }
   }
-
   /**
    * Lookup if the wordlist contains the selected
    * @param {Array} selected
@@ -548,12 +490,10 @@
   
   
     var words = [''];
-
     for (var i = 0; i < selected.length; i++) {
       words[0] += selected[i].letter;
     }
     words.push(words[0].split('').reverse().join(''));
-
     if (this.settings.words.indexOf(words[0]) > -1 ||
         this.settings.words.indexOf(words[1]) > -1) {
 		
@@ -574,14 +514,12 @@
         var row = selected[i].row + 1,
           col = selected[i].col + 1,
           el = document.querySelector('.ws-area .ws-row:nth-child(' + row + ') .ws-col:nth-child(' + col + ')');
-
         el.classList.add('ws-found');
       }
     }
   }
-
   /**
-   * Mouse event - Mouse down
+   * Mouse event - Mouse down
    * @param {Object} item
    */
   WordSeach.prototype.onMousedown = function(item) {
@@ -590,7 +528,6 @@
       _this.selectFrom = item;
     }
   }
-
   /**
    * Mouse event - Mouse move
    * @param {Object}
@@ -600,21 +537,17 @@
     return function() {
       if (_this.selectFrom) {
         _this.selected = _this.getItems(_this.selectFrom.row, _this.selectFrom.col, item.row, item.col);
-
         _this.clearHighlight();
-
         for (var i = 0; i < _this.selected.length; i ++) {
           var current = _this.selected[i],
             row = current.row + 1,
             col = current.col + 1,
             el = document.querySelector('.ws-area .ws-row:nth-child(' + row + ') .ws-col:nth-child(' + col + ')');
-
           el.className += ' ws-selected';
         }
       }
     }
   }
-
   /**
    * Mouse event - Mouse up
    */
@@ -627,5 +560,4 @@
       _this.selected = [];
     }
   }
-
 })();
