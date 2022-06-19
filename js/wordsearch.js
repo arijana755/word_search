@@ -56,12 +56,14 @@
         // initialize the application
         this.initialize();
 		if (this.settings.test) {
+    			alert('Got here 4');
 			isWorked = this.testmatrix(this.settings.gridSize);
 		} else {
 		    isWorked = this.bobmatrix(this.settings.gridSize)   
 		}
       }
       // Draw the matrix into wrap element
+      alert('Got here 5');
       this.drawmatrix();
 	  
 	  //added by bob to show score - require score function in the bob script
@@ -209,6 +211,7 @@
   WordSeach.prototype.initmatrix = function(size) {
    var rsize = size;
    var csize = size
+    alert('Got here');
    if (this.settings.condition == 0) {
 	csize = 18;
 	rsize = 12;
@@ -221,6 +224,7 @@
       rsize = 14;
       csize = 11;
    }
+    alert('Got here 2');
     for (var row = 0; row < rsize; row++) {
       for (var col = 0; col < csize; col++) {
         var item = {
@@ -234,6 +238,7 @@
         this.matrix[row][col] = item;
       }
     }
+    alert('Got here 3');
   }
   WordSeach.prototype.testmatrix = function(size) {
     var test_matrix = [
@@ -378,7 +383,7 @@
    * Draw the matrix
    */
   WordSeach.prototype.drawmatrix = function() {
-    alert('Got here');
+    alert('Got here 6');
     var rowcount = this.settings.gridSize;
 	var columncount = this.settings.gridSize;
 	if (this.settings.condition == 0 || this.settings.condition == 1) {
